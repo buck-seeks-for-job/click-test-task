@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+use Click\MeasurementCalculator\Application\MeasurementCalculator;
+use Click\MeasurementCalculator\Infrastructure\Csv\CommonCsvGateway;
+use Click\MeasurementCalculator\Infrastructure\FileSystem\RecursiveFileNameFetcher;
+
+require __DIR__ . '/vendor/autoload.php';
+
+if (!file_exists('tmp')) {
+    mkdir('tmp');
+}
+
+if (file_exists('output.csv')) {
+    unlink('output.csv');
+}
+
+$recursiveFileNameFetcher = new RecursiveFileNameFetcher();
+$csvCommonGateway = new CommonCsvGateway('output.csv', 'tmp', $recursiveFileNameFetcher);
+$calculator = new MeasurementCalculator($recursiveFileNameFetcher, $csvCommonGateway, $csvCommonGateway, $csvCommonGateway);
+
+$calculator->calculate(realpath($_SERVER['argv'][1]));

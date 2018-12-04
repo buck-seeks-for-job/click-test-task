@@ -1,0 +1,25 @@
+{
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5",
+    "hamcrest/hamcrest-php": "2.0.*",
+    "graze/hamcrest-test-listener": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Click\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Click\\Test\\": "tests/"
+    },
+    "files": [
+      "vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php"
+    ]
+  }
+}
