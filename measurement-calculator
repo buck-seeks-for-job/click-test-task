@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+ini_set('memory_limit', '16M');
 
 use Click\MeasurementCalculator\Application\MeasurementCalculator;
 use Click\MeasurementCalculator\Infrastructure\Csv\CommonCsvGateway;

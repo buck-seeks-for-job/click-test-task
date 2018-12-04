@@ -116,6 +116,6 @@ class CommonCsvGateway implements SourceDataRowFetcher, MeasurementCalculationSu
 
     public function __destruct()
     {
-        array_map('unlink', array_filter((array)glob(realpath($this->temporaryDirectory) . '/*')));
+	    exec('rm -rf ' . realpath($this->temporaryDirectory));
     }
 }
