@@ -113,9 +113,4 @@ class CommonCsvGateway implements SourceDataRowFetcher, MeasurementCalculationSu
     {
         return new \SplFileObject($fileName, $mode);
     }
-
-    public function __destruct()
-    {
-	    exec('rm -rf ' . realpath($this->temporaryDirectory));
-    }
 }

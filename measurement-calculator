@@ -8,16 +8,21 @@ use Click\MeasurementCalculator\Infrastructure\FileSystem\RecursiveFileNameFetch
 
 require __DIR__ . '/vendor/autoload.php';
 
-if (!file_exists('tmp')) {
-    mkdir('tmp');
+$temporaryDirectory = 'tmp';
+$outputFilename = 'output.csv';
+
+if (!file_exists($temporaryDirectory)) {
+    mkdir($temporaryDirectory);
 }
 
-if (file_exists('output.csv')) {
-    unlink('output.csv');
+if (file_exists($outputFilename)) {
+    unlink($outputFilename);
 }
 
 $recursiveFileNameFetcher = new RecursiveFileNameFetcher();
-$csvCommonGateway = new CommonCsvGateway('output.csv', 'tmp', $recursiveFileNameFetcher);
+$csvCommonGateway = new CommonCsvGateway($outputFilename, $temporaryDirectory, $recursiveFileNameFetcher);
 $calculator = new MeasurementCalculator($recursiveFileNameFetcher, $csvCommonGateway, $csvCommonGateway, $csvCommonGateway);
 
 $calculator->calculate(realpath($_SERVER['argv'][1]));
+
+exec('rm -rf ' . realpath($temporaryDirectory));

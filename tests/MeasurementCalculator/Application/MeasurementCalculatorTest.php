@@ -213,10 +213,6 @@ class MeasurementCalculatorTest extends TestCase implements FileNameFetcher
                 assertThat($persistedData, containsInAnyOrder($summary));
             }
 
-            public function __destruct()
-            {
-            }
-
             protected function openFile(string $fileName, string $mode): \SplFileObject
             {
                 if (!array_key_exists($fileName, $this->fileMap)) {
